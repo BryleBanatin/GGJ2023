@@ -12,28 +12,14 @@ public class Mixer : MonoBehaviour
     [SerializeField] private List<Material> colors;
     [SerializeField] private List<GameObject> potions;
     // 0 = Red, 1 = Blue, 2 = Yellow, 3 = Green, 4 = Violet, 5 = Success, 6 = White
+    [SerializeField] private GameObject result;
     private GameObject Spawned;
     Vector3 offset = new Vector3(0f, 3.0f, 0f);
-
-    public bool Blue { get; set; }
-    public bool Yellow { get; set; }
-    public bool Red { get; set; }
-    public bool Green { get; set; }
-    public bool Violet { get; set; }
-    public bool Pink { get; set; }
-
 
     private void Awake()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.PUT_PLANT, this.CheckCombination);
-        Blue = false;
-        Yellow = false; 
-        Red = false; 
-        Green = false; 
-        Violet = false; 
-        Pink = false;
     }
-
     public void CheckCombination() 
     {
         if (tower1.plantID == 2 && tower2.plantID == 7
@@ -43,7 +29,6 @@ public class Mixer : MonoBehaviour
             tower1.Clear();
             tower2.Clear();
             Spawned = Instantiate(potions[0], transform.position + offset, Quaternion.identity);
-            Blue= true;
         }
         else if (tower1.plantID == 5 && tower2.plantID == 0
             || tower1.plantID == 0 && tower2.plantID == 5)
@@ -52,7 +37,6 @@ public class Mixer : MonoBehaviour
             tower1.Clear();
             tower2.Clear();
             Spawned = Instantiate(potions[1], transform.position + offset, Quaternion.identity);
-            Red= true;
         }
         else if (tower1.plantID == 6 && tower2.plantID == 1
             || tower1.plantID == 1 && tower2.plantID == 6)
@@ -61,7 +45,6 @@ public class Mixer : MonoBehaviour
             tower1.Clear();
             tower2.Clear();
             Spawned = Instantiate(potions[2], transform.position + offset, Quaternion.identity);
-            Yellow= true;
         }
         else if (tower1.plantID == 9 && tower2.plantID == 8
             || tower1.plantID == 8 && tower2.plantID == 9)
@@ -70,7 +53,6 @@ public class Mixer : MonoBehaviour
             tower1.Clear();
             tower2.Clear();
             Spawned = Instantiate(potions[3], transform.position + offset, Quaternion.identity);
-            Green= true;
         }
         else if (tower1.plantID == 8 && tower2.plantID == 10
             || tower1.plantID == 10 && tower2.plantID == 8)
@@ -79,7 +61,6 @@ public class Mixer : MonoBehaviour
             tower1.Clear();
             tower2.Clear();
             Spawned = Instantiate(potions[4], transform.position + offset, Quaternion.identity);
-            Violet = true;
         }
         else if (tower1.plantID == 11 && tower2.plantID == 12
             || tower1.plantID == 12 && tower2.plantID == 11)
@@ -88,7 +69,6 @@ public class Mixer : MonoBehaviour
             tower1.Clear();
             tower2.Clear();
             Spawned = Instantiate(potions[5], transform.position + offset, Quaternion.identity);
-            Pink= true;
         }
         else 
         {
@@ -105,7 +85,6 @@ public class Mixer : MonoBehaviour
     private void Clear()
     {
         GameObject.Destroy(Spawned);
-        EventBroadcaster.Instance.PostEvent(EventNames.REGEN_PLANT);
         this.GetComponent<Renderer>().material = colors[6];
         tower1.Clear();
         tower2.Clear();

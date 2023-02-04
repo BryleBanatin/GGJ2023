@@ -7,7 +7,6 @@ using System.Collections;
  */ 
 public class EventNames {
 	public const string PUT_PLANT = "PUT_PLANT";
-	public const string REGEN_PLANT = "REGEN_PLANT";
 }
 
 
