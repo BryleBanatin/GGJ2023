@@ -13,6 +13,7 @@ public class ExamineRaycast : MonoBehaviour
     [SerializeField] Camera PlayerCam;
     [SerializeField] GameObject UI;
     [SerializeField] GameObject Exit;
+    [SerializeField] GameObject Book;
 
     private void Start()
     {
@@ -64,6 +65,7 @@ public class ExamineRaycast : MonoBehaviour
     private void LockCursorFunc()
     {
         FirstPersonController fpsController = this.gameObject.GetComponent<FirstPersonController>();
+        BookManager bookManager = Book.gameObject.GetComponent<BookManager>();
         if (isExamining == true)
         {
             Cursor.lockState = CursorLockMode.None;
