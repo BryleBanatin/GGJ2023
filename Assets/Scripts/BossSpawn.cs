@@ -35,12 +35,7 @@ public class BossSpawn : MonoBehaviour
         spawn.SetBool("GoUp", true);
         //Debug.Log("DON DON");
         //Boss Spawn / Animation
-        if (bossonField != true)
-        {
-            BossAppears.SetActive(true);
-            bossonField = true;
-        }    
-
+        BossAppears.SetActive(true);
 
     }
 

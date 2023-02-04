@@ -7,36 +7,42 @@ public class BossRoomChoice : MonoBehaviour
 {
     [SerializeField] private List<Vector3> RoomList;
     [SerializeField] private float _chooseTimer;
-    private int previousRoom = -1;
-    private float currentTime = 0;
+    [SerializeField] GameObject _playerRoom;
+    [SerializeField] GameObject player;
+    [SerializeField] private GameObject bossUnit;
+    private bool Showtime; //Monster spawn
+    /* South West Room = Element 0
+       South Room = Element 1
+       East Room = Element 2
+       North Room = Element 3
+    */
     // Start is called before the first frame update
     void Start()
     {
-        GetRandomRoom();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Room" + previousRoom);
+        GetItem obtainedItem = player.gameObject.GetComponent<GetItem>();
+        Debug.Log(obtainedItem.currObject);
         
-        if (currentTime >= _chooseTimer)
+        if (obtainedItem.currObject != null)
+        {
+            Showtime = true;
+        }
+        Debug.Log(Showtime);
+        if (Showtime == true && bossUnit.activeSelf == false)
         {
             Debug.Log("Changing Room!");
             GetRandomRoom();
-            currentTime = 0;
         }
-        if (this.gameObject.GetComponent<BossSpawn>().bossonField == true)
-        {
-            currentTime = 0;
-        }
-        else
-        currentTime += Time.deltaTime;
     }
 
     private void GetRandomRoom()
     {
-        int rand = GetRandomNumber(previousRoom); 
+        PlayerLocationHandler playerLocationHandler = _playerRoom.GetComponent<PlayerLocationHandler>();
+        int rand = GetRandomNumber(playerLocationHandler.CurrentRoomLocale()); 
         Vector3 newPosition = RoomList[rand];
         Debug.Log(newPosition);       
         this.transform.position = newPosition;
@@ -45,11 +51,28 @@ public class BossRoomChoice : MonoBehaviour
 
     private int GetRandomNumber(int previousRoom)
     {
+        PlayerLocationHandler playerLocationHandler = _playerRoom.GetComponent<PlayerLocationHandler>();
         int rand = Random.Range(0, RoomList.Count);
         Debug.Log(rand);
         if (rand != previousRoom)
         {
             return rand;
+        }
+        else if (rand == 0 && playerLocationHandler.CurrentLocation == "South West Room")
+        {
+            return GetRandomNumber(previousRoom);
+        }
+        else if (rand == 1 && playerLocationHandler.CurrentLocation == "South Room")
+        {
+            return GetRandomNumber(previousRoom);
+        }
+        else if (rand == 2 && playerLocationHandler.CurrentLocation == "East Room")
+        {
+            return GetRandomNumber(previousRoom);
+        }
+        else if (rand == 3 && playerLocationHandler.CurrentLocation == "North Room")
+        {
+            return GetRandomNumber(previousRoom);
         }
         else 
         {
