@@ -2,32 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayParticles : MonoBehaviour
+public class PedestalBehavior : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particles;
+    public bool IsFilled { get; set; } 
+    public bool lookedAt { get; set; }
+
     private void Awake()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.PUT_PLANT, this.Plant);
+        lookedAt = false;
+        IsFilled = false;
     }
 
-    public void ParticlesOn()
-    {
-        particles.Play();
-    }
-
-    public void ParticlesOff()
-    {
-        particles.Stop();
-    }
 
     private void Plant(Parameters parameters)
     {
         int index = parameters.GetIntExtra(EventNames.PUT_PLANT, -1);
-        switch (index) 
+        if (lookedAt == false) { return; }
+
+        switch (index)
         {
             case 0:
                 this.transform.Find("PlantContainer").Find("0").gameObject.SetActive(true);
                 break;
         }
+
+        IsFilled = true;
     }
 }

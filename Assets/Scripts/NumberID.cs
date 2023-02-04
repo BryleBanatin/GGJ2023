@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class NumberID : MonoBehaviour
 {
-    [SerializeField] private int m_ID;
+    [SerializeField] private PlantID data;
     public int ID { get; set; }
     private void Awake()
     {
-        ID = m_ID;
+        ID = data.id;
+        GetComponent<SpriteRenderer>().sprite = data.sprite;
     }
     
 }

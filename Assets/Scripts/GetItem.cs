@@ -8,7 +8,7 @@ public class GetItem : MonoBehaviour
     [SerializeField] private bool[] items;
     [SerializeField] private LayerMask pedestal;
 
-    private GameObject currPedestal;
+    [SerializeField] private GameObject currPedestal;
 
     public bool looking { get; private set; }
 
@@ -25,29 +25,24 @@ public class GetItem : MonoBehaviour
     }
 
     private void DetectPedestal()
-    {/*
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out var hit, 100.0f))
         {
-            if (hit.transform.gameObject.layer == 7)
+            if (hit.collider.gameObject.GetComponent<PedestalBehavior>() != null)
             {
-                hit.transform.gameObject.GetComponent<PlayParticles>().ParticlesOn();
-            }
-        }
-        */
+                currPedestal = hit.collider.gameObject;
+                currPedestal.GetComponent<PlayParticles>().ParticlesOn();
+                currPedestal.GetComponent<PedestalBehavior>().lookedAt = true;
 
-        if (Physics.Raycast(transform.position, transform.forward, out var hit, 100.0f, pedestal))
-        {
-            var obj = hit.collider.gameObject;
-            obj.GetComponent<PlayParticles>().ParticlesOn();
-            looking = true;
+                looking = true;
+            }
+            else 
+            {
+                currPedestal = null;
+                looking = false;
+            }    
         }
-        else 
-        {
-            looking = false;
-        }
+        
     }
 
     private void Inputs()
