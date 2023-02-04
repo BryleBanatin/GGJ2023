@@ -6,8 +6,10 @@ using UnityEngine.ProBuilder;
 public class BossSpawn : MonoBehaviour
 {
     private float currentTime = 0;
+    public bool bossonField = false;
     [SerializeField] private float _soundTimer;
     [SerializeField] private float _particlesTimer;
+    [SerializeField] private GameObject BossAppears;
 
     //[SerializeField] private AudioSource firecrackerSFXSource;
     [SerializeField] private ParticleSystem sparkleParticle;
@@ -33,6 +35,13 @@ public class BossSpawn : MonoBehaviour
         spawn.SetBool("GoUp", true);
         //Debug.Log("DON DON");
         //Boss Spawn / Animation
+        if (bossonField != true)
+        {
+            BossAppears.SetActive(true);
+            bossonField = true;
+        }    
+
+
     }
 
     public void SpawnSequence()

@@ -18,12 +18,19 @@ public class BossRoomChoice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Room" + previousRoom);
+        
         if (currentTime >= _chooseTimer)
         {
             Debug.Log("Changing Room!");
             GetRandomRoom();
-            currentTime= 0;
+            currentTime = 0;
         }
+        if (this.gameObject.GetComponent<BossSpawn>().bossonField == true)
+        {
+            currentTime = 0;
+        }
+        else
         currentTime += Time.deltaTime;
     }
 
@@ -31,15 +38,15 @@ public class BossRoomChoice : MonoBehaviour
     {
         int rand = GetRandomNumber(previousRoom); 
         Vector3 newPosition = RoomList[rand];
-        Debug.Log(newPosition);
+        Debug.Log(newPosition);       
         this.transform.position = newPosition;
         this.GetComponent<BossSpawn>().SpawnSequence();
     }
 
     private int GetRandomNumber(int previousRoom)
     {
-        int rand = Random.Range(0, 5);
-
+        int rand = Random.Range(0, RoomList.Count);
+        Debug.Log(rand);
         if (rand != previousRoom)
         {
             return rand;
@@ -51,4 +58,5 @@ public class BossRoomChoice : MonoBehaviour
         }
 
     }
+
 }
