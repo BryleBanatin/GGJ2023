@@ -25,18 +25,6 @@ public class NavChaseAgent : MonoBehaviour
         BossSpawn bossSpawn = Boss.GetComponent<BossSpawn>();
         agent.SetDestination(Player.transform.position);
         Debug.Log(agent.remainingDistance);
-        if (agent.remainingDistance > distanceLimit)
-        {
-            if (currentTime >= _spawnTimer)
-            {
-                this.gameObject.SetActive(false);
-                bossSpawn.gameObject.GetComponent<BossSpawn>().bossonField = false;
-                currentTime = 0;
-            }
-            currentTime += Time.deltaTime;
-        }
-        else
-            currentTime = 0;
 
     }
 

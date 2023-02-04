@@ -8,7 +8,7 @@ public class GetItem : MonoBehaviour
     [SerializeField] private LayerMask pedestal;
     [SerializeField] private LayerMask plant;
     [SerializeField] public GameObject currPedestal { get; set; }
-    [SerializeField] private GameObject currObject = null;
+    [SerializeField] public GameObject currObject = null;
 
     public bool looking { get; private set; }
 

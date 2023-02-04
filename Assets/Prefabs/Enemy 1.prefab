@@ -4998,9 +4998,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomList:
-  - {x: 37.03, y: 2.52, z: 0.86}
-  - {x: 0, y: 5.82, z: 0}
+  - {x: -94.7, y: 114.06, z: -116.79}
+  - {x: 66.1, y: 102.1, z: -76.6}
+  - {x: 98.2, y: 49.68, z: 28.13}
+  - {x: 16.15, y: 73.21, z: 106.21}
   _chooseTimer: 1
+  _playerRoom: {fileID: 0}
+  player: {fileID: 0}
+  bossUnit: {fileID: 0}
 --- !u!114 &923140149350965324
 MonoBehaviour:
   m_ObjectHideFlags: 0
