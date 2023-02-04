@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 1509926202366161661}
   - component: {fileID: 1509926202366161660}
   - component: {fileID: 1509926202366161663}
-  - component: {fileID: 1509926202366161659}
   - component: {fileID: 1895269788096077762}
   m_Layer: 7
   m_Name: Cylinder
@@ -130,23 +129,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.75947595
-  m_Height: 3.122013
+  m_Radius: 5
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0.023365736, y: -0.05314064, z: -0.00000011920929}
---- !u!114 &1509926202366161659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1509926202366161662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e82e1d2dc80bc42aa17775f4b63eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particles: {fileID: 1509926202664807937}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1895269788096077762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +145,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598c7e104a49ba04e863ea6aa108b23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsFilled: 0
+  plantList:
+  - {fileID: 1350855401648749716, guid: cf8600e20f6acb146bc1d2e1ff5f5b98, type: 3}
+  - {fileID: 116574342505719505, guid: 9ebf96aad521cf44dbbce09ef65b14b9, type: 3}
+  - {fileID: 2108759655176418782, guid: 5f2e195b6327d154a9cdb05a2ad1e7a5, type: 3}
+  - {fileID: 3688911900764030937, guid: a6adb6ba5e936d84ebd1b255c915cfed, type: 3}
+  - {fileID: 1186784599955664898, guid: da8d6f8bbe022734db0d503742b8a184, type: 3}
+  - {fileID: 4526545331543782563, guid: 9490fa9eaaac5c246ab4e05ce0dc93d1, type: 3}
+  - {fileID: 247423024777334170, guid: ae039d343134488499a9581269f4b458, type: 3}
+  - {fileID: 5230321941465394914, guid: fa978790e2842964a923a525503e01a7, type: 3}
+  - {fileID: 4286763746355591074, guid: 3742c355805a1ae46b908f9898d4bf02, type: 3}
+  - {fileID: 6231947836996420598, guid: f97c42611add7a445817a35ebe7bf659, type: 3}
+  - {fileID: 2483670263403908775, guid: 45c64cc50b1c15543b38a52183acb61b, type: 3}
+  - {fileID: 6860694218375717087, guid: e7a89c84a0f539b4f8d0648f6b375d5b, type: 3}
+  - {fileID: 6578107743954893205, guid: c2f2bc7a7a461a14492f000718d197a7, type: 3}
+  - {fileID: 2288021574036297790, guid: b61e0bcd8a6ee0b47a200413b7508594, type: 3}
+  particles: {fileID: 1509926202664807937}
 --- !u!1 &1509926202664807938
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,131 +5,57 @@ using UnityEngine;
 
 public class GetItem : MonoBehaviour
 {
-    [SerializeField] private bool[] items;
     [SerializeField] private LayerMask pedestal;
-
-    [SerializeField] private GameObject currPedestal;
+    [SerializeField] private LayerMask plant;
+    [SerializeField] public GameObject currPedestal { get; set; }
+    [SerializeField] private GameObject currObject = null;
 
     public bool looking { get; private set; }
-
-    private void Start()
-    {
-        items = new bool[8];  
-    }
 
     // Update is called once per frame
     void Update()
     {
         Inputs();
-        DetectPedestal();
-    }
-
-    private void DetectPedestal()
-    {
-        if (Physics.Raycast(transform.position, transform.forward, out var hit, 100.0f))
-        {
-            if (hit.collider.gameObject.GetComponent<PedestalBehavior>() != null)
-            {
-                currPedestal = hit.collider.gameObject;
-                currPedestal.GetComponent<PlayParticles>().ParticlesOn();
-                currPedestal.GetComponent<PedestalBehavior>().lookedAt = true;
-
-                looking = true;
-            }
-            else 
-            {
-                currPedestal = null;
-                looking = false;
-            }    
-        }
-        
     }
 
     private void Inputs()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            PickUp();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            if (items[0] == true && looking == true)
+            if (currObject != null && currPedestal != null)
             {
                 PutPlant();
             }
-            else
+            /*
+            else if (currObject != null && looking == false)
             {
-                if (items[0] == false)
-                {
-                    Debug.Log("Plant Not Found");
-                }
-                else if(looking != true) 
-                {
-                    Debug.Log("Pedestal Not Found");
-                }
+                //ThrowOut();
             }
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            items[1] = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            items[2] = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            items[3] = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            items[4] = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            items[5] = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            items[6] = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            items[7] = false;
+            */
+            else if (currObject == null)
+            {
+                PickUp();
+            }
         }
     }
 
     private void PutPlant()
     {
-        items[0] = false;
-        //add add item command
-        Parameters parameters = new Parameters();
-        parameters.PutExtra(EventNames.PUT_PLANT, 0);
-        EventBroadcaster.Instance.PostEvent(EventNames.PUT_PLANT, parameters);
+        currPedestal.GetComponent<PedestalBehavior>().Plant(currObject.GetComponent<NumberID>().ID);
+        currObject = null;
+        EventBroadcaster.Instance.PostEvent(EventNames.PUT_PLANT);
     }
 
     private void PickUp()
     {
-        RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 5.0f, plant))
         {
-            if (hit.transform.gameObject.layer == 6)
-            {
-                Debug.Log($"Hit {hit.transform.gameObject.name}");
-                int ID = hit.transform.gameObject.GetComponent<NumberID>().ID;
-                Debug.Log($"PickedUp {ID}");
-                if (items[ID] == false)
-                {
-                    items[ID] = true;
-                    Debug.Log($"PickedUp {ID}");
-                }
-                hit.transform.gameObject.SetActive(false);
-            }
-            
+            currObject = hit.transform.gameObject;
+            Debug.Log(currObject.GetComponent<NumberID>().ID);
+            hit.transform.gameObject.SetActive(false);
         }
-        
     }
 }
