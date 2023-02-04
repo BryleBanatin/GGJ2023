@@ -8,6 +8,8 @@ public class GetItem : MonoBehaviour
     [SerializeField] private bool[] items;
     [SerializeField] private LayerMask pedestal;
 
+    private GameObject currPedestal;
+
     public bool looking { get; private set; }
 
     private void Start()
@@ -58,11 +60,7 @@ public class GetItem : MonoBehaviour
         {
             if (items[0] == true && looking == true)
             {
-                items[0] = false;
-                //add add item command
-                Parameters parameters = new Parameters();
-                parameters.PutExtra(EventNames.PUT_PLANT, 0);
-                EventBroadcaster.Instance.PostEvent(EventNames.PUT_PLANT, parameters);
+                PutPlant();
             }
             else
             {
@@ -105,6 +103,15 @@ public class GetItem : MonoBehaviour
         {
             items[7] = false;
         }
+    }
+
+    private void PutPlant()
+    {
+        items[0] = false;
+        //add add item command
+        Parameters parameters = new Parameters();
+        parameters.PutExtra(EventNames.PUT_PLANT, 0);
+        EventBroadcaster.Instance.PostEvent(EventNames.PUT_PLANT, parameters);
     }
 
     private void PickUp()
