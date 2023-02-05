@@ -18,14 +18,13 @@ public class BossRoomBlock : MonoBehaviour
     }
     private void Awake()
     {
-
+        RoomBlock(GetRandomNumber(previousRoom));
     }
 
     // Update is called once per frame
     void Update()
     {
-        BossRoomChoice BossFlag = this.gameObject.GetComponent<BossRoomChoice>();
-        if (currentTime >= _chooseTimer && BossFlag.Showtime == true)
+        if (currentTime >= _chooseTimer)
         {
             Debug.Log("Blocking Room!");
             RoomBlock(GetRandomNumber(previousRoom));
