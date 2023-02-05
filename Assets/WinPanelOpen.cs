@@ -5,6 +5,9 @@ using UnityEngine;
 public class WinPanelOpen : MonoBehaviour
 {
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject FPSController;
+
+    private bool WinFlag = false;
 
     private void Awake()
     {
@@ -19,5 +22,22 @@ public class WinPanelOpen : MonoBehaviour
     private void OpenPanel()
     {
         winPanel.SetActive(true);
+        WinFlag = true;
+        LockCursor();
+
+    }
+
+    private void LockCursor()
+    {
+        Debug.Log("CALLED");
+      FirstPersonController fpsController = FPSController.gameObject.GetComponent<FirstPersonController>();
+        ExamineRaycast examine = FPSController.gameObject.GetComponent<ExamineRaycast>();
+        examine.isExamining = true;
+        Cursor.lockState = CursorLockMode.None;
+                fpsController.playerCanMove = false;
+                fpsController.lockCursor = false;
+                fpsController.cameraCanMove = false;
+                fpsController.enableHeadBob = false;
+                fpsController.enableZoom = false;
     }
 }

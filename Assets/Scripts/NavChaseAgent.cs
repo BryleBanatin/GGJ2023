@@ -15,6 +15,7 @@ public class NavChaseAgent : MonoBehaviour
     [SerializeField] GameObject Boss;
     [SerializeField] VideoPlayer Video;
     [SerializeField] GameObject DeathScreen;
+    [SerializeField] AudioSource scream;
     private float currentTime = 0;
     private bool isDead = false;
     // Start is called before the first frame update
@@ -32,7 +33,10 @@ public class NavChaseAgent : MonoBehaviour
         Debug.Log(agent.remainingDistance);
         Video.loopPointReached += ChangeScene;
 
-
+        if (agent.remainingDistance < 20.0f)
+        {
+            scream.Play();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
