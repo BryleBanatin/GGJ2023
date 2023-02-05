@@ -57,5 +57,19 @@ public class GetItem : MonoBehaviour
             Debug.Log(currObject.GetComponent<NumberID>().ID);
             hit.transform.gameObject.SetActive(false);
         }
+
+        CheckWinCondition();
+    }
+
+    private void CheckWinCondition()
+    {
+        if (currObject != null)
+        {
+            if (currObject.GetComponent<NumberID>().ID == 13)
+            {
+                Time.timeScale = 0;
+                //add win screen
+            }
+        }
     }
 }
