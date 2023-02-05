@@ -10,7 +10,7 @@ public class BossRoomChoice : MonoBehaviour
     [SerializeField] GameObject _playerRoom;
     [SerializeField] GameObject player;
     [SerializeField] private GameObject bossUnit;
-    private bool Showtime; //Monster spawn
+    public bool Showtime; //Monster spawn
     /* South West Room = Element 0
        South Room = Element 1
        East Room = Element 2
