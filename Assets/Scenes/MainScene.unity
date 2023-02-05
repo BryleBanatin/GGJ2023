@@ -73541,7 +73541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6282148846694732475, guid: 00e41f7a991bc2d4c8fcd0c27130f32d, type: 3}
       propertyPath: m_Name
-      value: FirstPersonController
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6872884754956235154, guid: 00e41f7a991bc2d4c8fcd0c27130f32d, type: 3}
       propertyPath: UI
