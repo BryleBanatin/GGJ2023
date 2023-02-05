@@ -68,7 +68,7 @@ public class GetItem : MonoBehaviour
             if (currObject.GetComponent<NumberID>().ID == 13)
             {
                 Time.timeScale = 0;
-                //add win screen
+                EventBroadcaster.Instance.PostEvent(EventNames.PLAYER_WIN);
             }
         }
     }
